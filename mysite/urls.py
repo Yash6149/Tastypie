@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url, include
-from tastypie.api import Api
-from myapp.api import EntryResource, UserResource
-
-v1_api = Api(api_name='v1')
-v1_api.register(UserResource())
-v1_api.register(EntryResource())
+from myapp.urls import v1_api
 
 urlpatterns = [
     # The normal jazz here...
-	url('admin/', admin.site.urls),
-    url(r'^api/', include(v1_api.urls)),
+    url('admin/', admin.site.urls),
+    url(r'^api/',include(v1_api.urls)),
+    url(r'^api/myapp/doc/',
+        include('tastypie_swagger.urls',
+                namespace='myapp_tastypie_swagger'),
+        kwargs={"tastypie_api_module": "myapp.urls.v1_api",
+                "namespace": "myapp_tastypie_swagger"}),
 ]

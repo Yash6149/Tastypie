@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tastypie',
     'myapp',
+    'tastypie_swagger',
 ]
 
-MIDDLEWARE = [
+TASTYPIE_SWAGGER_API_MODULE = 'myapp.urls.api'
+
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
